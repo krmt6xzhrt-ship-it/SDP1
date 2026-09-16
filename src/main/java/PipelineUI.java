@@ -31,14 +31,11 @@ public class PipelineUI extends JFrame {
 
         createUI();
     }
-
-
     private void createUI() {
 
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout(15,15));
         mainPanel.setBorder(new EmptyBorder(20,25,20,25));
-
 
         // title
         JLabel title = new JLabel("Data Pipeline Builder");
@@ -46,7 +43,6 @@ public class PipelineUI extends JFrame {
 
         JLabel description =
                 new JLabel("Create and validate your data pipeline configuration");
-
 
         JPanel titlePanel = new JPanel();
         titlePanel.setLayout(new BoxLayout(titlePanel, BoxLayout.Y_AXIS));
@@ -57,26 +53,18 @@ public class PipelineUI extends JFrame {
 
         mainPanel.add(titlePanel, BorderLayout.NORTH);
 
-
-
         // configuration form
         JPanel form = new JPanel(new GridLayout(0,2,10,12));
-
-
         nameField = new JTextField("My Pipeline");
-
         sourceBox =
                 new JComboBox<>(SourceType.values());
 
         destinationField =
                 new JTextField("https://example.com/data");
-
-
         intervalSpinner =
                 new JSpinner(
                         new SpinnerNumberModel(60,10,3600,10)
                 );
-
 
         batchSpinner =
                 new JSpinner(
@@ -88,7 +76,6 @@ public class PipelineUI extends JFrame {
                 new JSpinner(
                         new SpinnerNumberModel(3,0,10,1)
                 );
-
 
         parallelSpinner =
                 new JSpinner(
@@ -300,10 +287,7 @@ public class PipelineUI extends JFrame {
                     "Pipeline created successfully!\n\n"
                             + pipeline
             );
-
-
         } catch(Exception ex){
-
             resultArea.setText(
                     "Validation error:\n\n"
                             + ex.getMessage()
@@ -311,10 +295,7 @@ public class PipelineUI extends JFrame {
         }
     }
 
-
-
     private void showPreset(DataPipeline pipeline) {
-
         nameField.setText(
                 pipeline.getName()
         );
@@ -346,20 +327,15 @@ public class PipelineUI extends JFrame {
         formatBox.setSelectedItem(
                 pipeline.getFormat()
         );
-
         compressionBox.setSelected(
                 pipeline.isCompression()
         );
-
         encryptionBox.setSelected(
                 pipeline.isEncryption()
         );
-
         monitoringBox.setSelected(
                 pipeline.isMonitoring()
         );
-
-
         resultArea.setText(
                 "Preset loaded.\n\n"
                         + pipeline
