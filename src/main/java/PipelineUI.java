@@ -3,7 +3,6 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class PipelineUI extends JFrame {
-
     private JTextField nameField;
     private JComboBox<SourceType> sourceBox;
     private JTextField destinationField;

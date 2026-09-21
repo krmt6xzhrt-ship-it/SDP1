@@ -3,7 +3,6 @@ public final class DataPipeline {
     private final SourceType sourceType;
     private final String destination;
     private final ScheduleConfig schedule;
-
     private final int batchSize;
     private final int retryCount;
     private final int parallelism;
@@ -26,7 +25,6 @@ public final class DataPipeline {
         this.format = builder.format;
         this.monitoring = builder.monitoring;
     }
-
     public String getName() {
         return name;
     }
@@ -77,7 +75,6 @@ public final class DataPipeline {
                 ", monitoring=" + monitoring +
                 '}';
     }
-
     public static class Builder {
         // required fields
         private final String name;
@@ -85,7 +82,7 @@ public final class DataPipeline {
         private final String destination;
         private final ScheduleConfig schedule;
 
-        // optional fields, these values are used if user does not change them
+        // optional fields
         private int batchSize = 500;
         private int retryCount = 3;
         private int parallelism = 1;
@@ -111,61 +108,44 @@ public final class DataPipeline {
             this.destination = destination;
             this.schedule = schedule;
         }
-
         public Builder batchSize(int size) {
             if(size < 100 || size > 10000)
                 throw new IllegalArgumentException("Batch size must be from 100 to 10000");
             this.batchSize = size;
             return this;
         }
-
-
         public Builder retryCount(int count){
-
             if(count < 0 || count > 10)
                 throw new IllegalArgumentException("Retry count must be from 0 to 10");
-
             this.retryCount = count;
             return this;
         }
-
-
         public Builder parallelism(int value){
-
             if(value < 1 || value > 16)
                 throw new IllegalArgumentException("Parallelism must be from 1 to 16");
-
             this.parallelism = value;
             return this;
         }
-
-
         public Builder enableCompression(){
             this.compression = true;
             return this;
         }
-
-
         public Builder enableEncryption(){
             this.encryption = true;
             return this;
         }
-
         public Builder format(String format){
             if(format == null || format.isBlank())
                 throw new IllegalArgumentException("Format cannot be empty");
             this.format = format.toUpperCase();
             return this;
         }
-
         public Builder enableMonitoring(){
             this.monitoring = true;
             return this;
         }
         public DataPipeline build(){
-
             validateDependencies();
-
             return new DataPipeline(this);
         }
         private void validateDependencies(){
